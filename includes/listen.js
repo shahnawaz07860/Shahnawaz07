@@ -9,7 +9,7 @@ module.exports = function ({ api, models }) {
     var day = moment.tz("Asia/Kolkata").day();
 
 
-    const checkttDataPath = __dirname + '/../Priyansh/commands/checktuongtac/';
+    const checkttDataPath = __dirname + '/../shahnawaz/commands/checktuongtac/';
     setInterval(async () => {
         const day_now = moment.tz("Asia/Kolkata").day();
         const _ADMINIDs = [...global.config.NDH, ...global.config.ADMINBOT];
@@ -26,7 +26,7 @@ module.exports = function ({ api, models }) {
                     const checktt = JSON.parse(fs.readFileSync(checkttDataPath + checkttFile));
                     let storage = [], count = 1;
                     for (const item of checktt.day) {
-                        const userName = await Users.getNameUser(item.id) || 'Priyansh Rajput';
+                        const userName = await Users.getNameUser(item.id) || 'Shahnawaz Siddiqui';
                         const itemToPush = item;
                         itemToPush.name = userName;
                         storage.push(itemToPush);
@@ -41,7 +41,7 @@ module.exports = function ({ api, models }) {
                             return a.name.localeCompare(b.name);
                         }
                     });
-                    let checkttBody = '==PRIYANSH RAJPUT ❤️==\n\n';
+                    let checkttBody = '==Shahnawaz Siddiqui ❤️==\n\n';
                     checkttBody += storage.slice(0, 10).map(item => {
                         return `${count++}. ${item.name} with ${item.count} message`;
                     }).join('\n');
@@ -63,7 +63,7 @@ module.exports = function ({ api, models }) {
                         const checktt = JSON.parse(fs.readFileSync(checkttDataPath + checkttFile));
                         let storage = [], count = 1;
                         for (const item of checktt.week) {
-                            const userName = await Users.getNameUser(item.id) || 'Priyansh Hun Yar';
+                            const userName = await Users.getNameUser(item.id) || 'SHAHNAWAZ Hun Yar';
                             const itemToPush = item;
                             itemToPush.name = userName;
                             storage.push(itemToPush);
@@ -78,7 +78,7 @@ module.exports = function ({ api, models }) {
                                 return a.name.localeCompare(b.name);
                             }
                         });
-                        let checkttBody = '==PRIYANSH RAJPUT ❤️==\n\n';
+                        let checkttBody = '==Shahnawaz Siddiqui ❤️==\n\n';
                         checkttBody += storage.slice(0, 10).map(item => {
                             return `${count++}. ${item.name} with ${item.count} message`;
                         }).join('\n');
@@ -103,7 +103,7 @@ module.exports = function ({ api, models }) {
     (async function () {
 
         try {
-            logger(global.getText('listen', 'startLoadEnvironment'), '[ Priyansh Rajput ]');
+            logger(global.getText('listen', 'startLoadEnvironment'), '[ Shahnawaz Siddiqui ]');
             let threads = await Threads.getAll(),
                 users = await Users.getAll(['userID', 'name', 'data']),
                 currencies = await Currencies.getAll(['userID']);
@@ -135,12 +135,12 @@ module.exports = function ({ api, models }) {
                     global['data']['commandBanned']['set'](idUsers, dataU['data']['commandBanned']);
             }
             for (const dataC of currencies) global.data.allCurrenciesID.push(String(dataC['userID']));
-            logger.loader(global.getText('listen', 'loadedEnvironmentUser')), logger(global.getText('listen', 'successLoadEnvironment'), '[ Priyansh ]');
+            logger.loader(global.getText('listen', 'loadedEnvironmentUser')), logger(global.getText('listen', 'successLoadEnvironment'), '[ Shahnawaz ]');
         } catch (error) {
             return logger.loader(global.getText('listen', 'failLoadEnvironment', error), 'error');
         }
     }());
-    logger(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "" : global.config.BOTNAME}`, "[ Priyansh Rajput ]");
+    logger(`[ ${global.config.PREFIX} ] • ${(!global.config.BOTNAME) ? "" : global.config.BOTNAME}`, "[ shahnawaz Siddiqui ]");
 
     ///////////////////////////////////////////////
     //========= Require all handle need =========//
@@ -154,7 +154,7 @@ module.exports = function ({ api, models }) {
     const handleCreateDatabase = require("./handle/handleCreateDatabase")({ api, Threads, Users, Currencies, models });
 
     //DEFINE DATLICH PATH
-    const datlichPath = __dirname + "/../Priyansh/commands/cache/datlich.json";
+    const datlichPath = __dirname + "/../Shahnawaz/commands/cache/datlich.json";
 
     //FUNCTION WORKS AS IT'S NAME, CRE: PRIYANSHU
     const monthToMSObj = {
@@ -251,13 +251,13 @@ module.exports = function ({ api, models }) {
                 out.attachment = [];
                 for (a of el.ATTACHMENT) {
                     let getAttachment = (await axios.get(encodeURI(a.url), { responseType: "arraybuffer" })).data;
-                    fs.writeFileSync(__dirname + `/../Priyansh/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
-                    out.attachment.push(fs.createReadStream(__dirname + `/../Priyansh/commands/cache/${a.fileName}`));
+                    fs.writeFileSync(__dirname + `/../shahnawaz/commands/cache/${a.fileName}`, Buffer.from(getAttachment, 'utf-8'));
+                    out.attachment.push(fs.createReadStream(__dirname + `/../shahnawaz/commands/cache/${a.fileName}`));
                 }
             }
             console.log(out);
             if ("BOX" in el) await api.setTitle(el["BOX"], el["TID"]);
-            api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../Priyansh/commands/cache/${a.fileName}`)) : "");
+            api.sendMessage(out, el["TID"], () => ("ATTACHMENT" in el) ? el.ATTACHMENT.forEach(a => fs.unlinkSync(__dirname + `/../shahnawaz/commands/cache/${a.fileName}`)) : "");
         }
 
     }
